@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from routers.index import register_index
+from shortener import register_shortener
 
 
 def register_all_routers(app):
-    register_index(app)
+    register_shortener(app)
 
 
 def main():

@@ -1,7 +1,7 @@
-from data import schemas
-from data.database.crud import create_url, delete_url_by_name, get_url_by_name,\
+from . import schemas
+from .crud import create_url, delete_url_by_name, get_url_by_name,\
     update_url_by_name
-from data.database.db import get_db
+from data.db import get_db
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
@@ -36,7 +36,7 @@ async def redirect(url: str, db: Session = Depends(get_db)):
     raise HTTPException(status_code=404, detail="URL not found")
 
 
-def register_index(app: FastAPI):
+def register_shortener(app: FastAPI):
     app.add_api_route("/api/url/new", url_new, methods=["POST"],
                       response_model=schemas.Url)
     app.add_api_route("/api/url/get/{url_name}", url_get, methods=["GET"],

@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 
-from .db import base
+from data.db import base
 
 
 class Url(base):

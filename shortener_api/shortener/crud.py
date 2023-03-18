@@ -1,7 +1,7 @@
 from slugify import slugify
 from utils.random_slug import generate_slug
 
-from .url import Url
+from .models import Url
 
 
 def create_url(session, url: str, name: str = None) -> Url:
