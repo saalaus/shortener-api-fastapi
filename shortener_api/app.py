@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from shortener import register_shortener
+from shortener_api.shortener import register_shortener
 
 
 def register_all_routers(app):

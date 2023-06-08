@@ -1,7 +1,7 @@
 from . import schemas
 from .crud import create_url, delete_url_by_name, get_url_by_name,\
     update_url_by_name
-from data.db import get_db
+from shortener_api.data.db import get_db
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
@@ -37,11 +37,11 @@ async def redirect(url: str, db: Session = Depends(get_db)):
 
 
 def register_shortener(app: FastAPI):
-    app.add_api_route("/api/url/new", url_new, methods=["POST"],
+    app.add_api_route("/api/url/new", url_new, methods=["GET", "POST"],
                       response_model=schemas.Url)
-    app.add_api_route("/api/url/get/{url_name}", url_get, methods=["GET"],
+    app.add_api_route("/api/url/get/{url_name}", url_get, methods=["GET", "POST"],
                       response_model=schemas.Url)
-    app.add_api_route("/api/url/update", url_update, methods=["PATCH"],
+    app.add_api_route("/api/url/update", url_update, methods=["GET", "POST", "PATCH"],
                       response_model=schemas.Url)
-    app.add_api_route("/api/url/delete", url_delete, methods=["DELETE"])
-    app.add_api_route("/{url}", redirect, methods=["GET"])
+    app.add_api_route("/api/url/delete", url_delete, methods=["GET", "POST", "DELETE"])
+    app.add_api_route("/{url}", redirect, methods=["GET", "POST"])

@@ -1,5 +1,5 @@
 from slugify import slugify
-from utils.random_slug import generate_slug
+from shortener_api.utils.random_slug import generate_slug
 
 from .models import Url
 
