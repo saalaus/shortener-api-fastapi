@@ -4,19 +4,98 @@ version = "0.1.0"
 description = ""
 authors = ["saalaus <saalaus2@gmail.com>"]
 readme = "README.md"
-packages = [{include = "shortener_api_fastapi"}]
+packages = [{include = "shortener_api"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = "^0.94.1"
 sqlalchemy = "^2.0.6"
 python-slugify = "^8.0.1"
+uvicorn = "^0.22.0"
+alembic = "^1.11.1"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.2"
 sqlalchemy2-stubs = "^0.0.2a32"
+ruff = "^0.0.272"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 81
+exclude = [
+    "venv",
+    "alembic"
+]
+ignore = [
+    "D100", # Missing docstring in public module
+    "D101", # Missing docstring in public class
+    "D103", # Missing docstring in function
+    "D104", # Missing docstring in public package
+    "D213", # multi-line-summary-second-line
+    "D203", # one-blank-line-before-class
+    "FBT001", # Boolean positional arg in function definition
+]
+select = [
+    "F",
+    "E",
+    "W",
+    "C90",
+    "I",
+    "N",
+    "D",
+    "UP",
+    "YTT",
+    "ANN",
+    "ASYNC",
+    "S",
+    "BLE",
+    "FBT",
+    "B",
+    "A",
+    "COM",
+    "C4",
+    "DTZ",
+    "T10",
+    "DJ",
+    "EM",
+    "EXE",
+    "FA",
+    "ISC",
+    "ICN",
+    "G",
+    "INP",
+    "PIE",
+    "T20",
+    "PYI",
+    "PT",
+    "Q",
+    "RSE",
+    "RET",
+    "SLF",
+    "SIM",
+    "TID",
+    "TCH",
+    "INT",
+    "ARG",
+    "PTH",
+    "TD",
+    "FIX",
+    "ERA",
+    "PD",
+    "PGH",
+    "PL",
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+    "TRY",
+    "FLY",
+    "NPY",
+    "AIR",
+    "RUF",
+
+]
