@@ -38,7 +38,7 @@ async def redirect(url: str, db: Session = Depends(get_db)):
 
 def register_shortener(app: FastAPI):
     app.add_api_route("/api/url/new", url_new, methods=["POST"],
-                      response_model=schemas.Url,
+                      response_model=schemas.CreateUrl,
                       status_code=status.HTTP_201_CREATED,
                       description="Short the url",
                       responses={
@@ -48,8 +48,19 @@ def register_shortener(app: FastAPI):
                           }
                       })
     app.add_api_route("/api/url/get/{url_name}", url_get, methods=["GET"],
-                      response_model=schemas.Url)
+                      response_model=schemas.Url,
+                      status_code=status.HTTP_200_OK,
+                      description="Get shorten url info",
+                      responses={
+                          status.HTTP_200_OK: {
+                              "model": schemas.Url,
+                              "description": "Ok response"
+                          }
+                      })
     app.add_api_route("/api/url/update", url_update, methods=["PATCH"],
-                      response_model=schemas.Url)
-    app.add_api_route("/api/url/delete", url_delete, methods=["DELETE"])
-    app.add_api_route("/{url}", redirect, methods=["GET"])
+                      response_model=schemas.UpdateUrl)
+    app.add_api_route("/api/url/delete", url_delete, methods=["DELETE"],
+                      response_model=schemas.DeleteUrl)
+    app.add_api_route("/{url}", redirect, methods=["GET"],
+                      status_code=status.HTTP_308_PERMANENT_REDIRECT,
+                      description="Redirect to original url")

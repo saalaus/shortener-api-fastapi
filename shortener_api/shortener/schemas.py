@@ -14,7 +14,10 @@ class UpdateUrl(BaseUrl):
     new_name: str = None
     url: AnyHttpUrl = None
     active: bool = None
-    
+
+
+class DeleteUrl(BaseModel):
+    deleted: bool = None
 
 class Url(BaseModel):
     url: AnyHttpUrl
