@@ -21,7 +21,6 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from shortener_api.data.db import base
 from shortener_api.shortener.models import Url
-from shortener_api.auth.models import User
 target_metadata = base.metadata
 
 # other values from the config, defined by the needs of env.py,

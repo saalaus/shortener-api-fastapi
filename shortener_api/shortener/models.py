@@ -1,7 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship, mapped_column
 
-from shortener_api.auth.models import User
 from shortener_api.data.db import base
 
 
@@ -12,5 +11,3 @@ class Url(base):
     url = sa.Column(sa.String)
     views = sa.Column(sa.Integer, default=0)
     active = sa.Column(sa.Boolean, default=True)
-    user_id = mapped_column(sa.ForeignKey("users.id"))
-    user = relationship(User, back_populates="user_urls")
