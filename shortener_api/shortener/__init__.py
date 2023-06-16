@@ -1,1 +1,1 @@
-from .routers import register_shortener
+from .routers import url_router, redirect_router

@@ -19,6 +19,7 @@ alembic = "^1.11.1"
 pytest = "^7.2.2"
 sqlalchemy2-stubs = "^0.0.2a32"
 ruff = "^0.0.272"
+black = "^23.3.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -35,9 +36,11 @@ ignore = [
     "D101", # Missing docstring in public class
     "D103", # Missing docstring in function
     "D104", # Missing docstring in public package
+    "D106", # Missing docstring in public nested
     "D213", # multi-line-summary-second-line
     "D203", # one-blank-line-before-class
     "FBT001", # Boolean positional arg in function definition
+    "B008", # Do not perform function call `` in argument
 ]
 select = [
     "F",
