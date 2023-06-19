@@ -25,11 +25,15 @@ black = "^23.3.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.black]
+line-length = 79
+
 [tool.ruff]
-line-length = 81
+line-length = 79
 exclude = [
     "venv",
-    "alembic"
+    "alembic",
+    "tests",
 ]
 ignore = [
     "D100", # Missing docstring in public module
@@ -41,6 +45,9 @@ ignore = [
     "D203", # one-blank-line-before-class
     "FBT001", # Boolean positional arg in function definition
     "B008", # Do not perform function call `` in argument
+    "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
+    "INP001", # File `` is part of an implicit namespace package. Add an `__init__.py`
+    "A003", # Class attribute `` is shadowing a Python builtin
 ]
 select = [
     "F",

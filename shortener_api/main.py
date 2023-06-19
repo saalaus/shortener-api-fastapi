@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from shortener_api.shortener import redirect_router, url_router
+from shortener_api.shortener.routers import redirect_router, url_router
 
 
 def register_all_routers(app: FastAPI) -> None:

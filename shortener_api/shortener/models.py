@@ -1,5 +1,4 @@
 import sqlalchemy as sa
-from sqlalchemy.orm import relationship, mapped_column
 
 from shortener_api.data.db import base
 
