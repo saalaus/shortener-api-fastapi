@@ -10,6 +10,10 @@ class CreateUrl(BaseModel):
     name: str = None
 
 
+class CreatedUrl(BaseModel):
+    shorten_url: AnyHttpUrl
+
+
 class UpdateUrl(BaseUrl):
     new_name: str = None
     url: AnyHttpUrl = None

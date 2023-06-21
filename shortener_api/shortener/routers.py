@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 
@@ -18,23 +18,24 @@ redirect_router = APIRouter()
 
 @url_router.post(
     "/new",
-    response_model=schemas.Url,
+    response_model=schemas.CreatedUrl,
     status_code=status.HTTP_201_CREATED,
     description="Short the url",
     responses={
         status.HTTP_201_CREATED: {
-            "model": schemas.Url,
+            "model": schemas.CreatedUrl,
             "description": "Short url",
         },
     },
 )
 async def url_new(
+    request: Request,
     url: schemas.CreateUrl,
     db: Session = Depends(get_db),
-) -> schemas.Url:
+) -> schemas.CreatedUrl:
     url = create_url(db, url.url, url.name)
 
-    return url
+    return {"shorten_url": str(request.url_for("redirect", url_name=url.name))}
 
 
 @url_router.get(
@@ -82,6 +83,7 @@ async def url_delete(
     status_code=status.HTTP_307_TEMPORARY_REDIRECT,
     response_class=RedirectResponse,
     description="Redirect to original url",
+    name="redirect",
     responses={
         status.HTTP_307_TEMPORARY_REDIRECT: {
             "description": "Successfull redirect",
