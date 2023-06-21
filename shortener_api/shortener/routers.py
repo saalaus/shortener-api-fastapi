@@ -18,7 +18,7 @@ redirect_router = APIRouter()
 
 @url_router.post(
     "/new",
-    response_model=schemas.CreateUrl,
+    response_model=schemas.Url,
     status_code=status.HTTP_201_CREATED,
     description="Short the url",
     responses={
@@ -78,11 +78,12 @@ async def url_delete(
 
 
 @redirect_router.get(
-    "/",
-    status_code=status.HTTP_308_PERMANENT_REDIRECT,
+    "/{url_name}",
+    status_code=status.HTTP_307_TEMPORARY_REDIRECT,
+    response_class=RedirectResponse,
     description="Redirect to original url",
     responses={
-        status.HTTP_308_PERMANENT_REDIRECT: {
+        status.HTTP_307_TEMPORARY_REDIRECT: {
             "description": "Successfull redirect",
         },
         status.HTTP_404_NOT_FOUND: {
@@ -92,10 +93,11 @@ async def url_delete(
     },
 )
 async def redirect(
-    url: str,
+    url_name: str,
     db: Session = Depends(get_db),
 ) -> RedirectResponse:
-    url_obj = get_url_by_name(db, url)
+    url_obj = get_url_by_name(db, url_name)
+
     if url_obj and url_obj.active:
         url_obj.views += 1
         db.commit()
