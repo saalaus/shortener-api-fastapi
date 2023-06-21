@@ -130,3 +130,6 @@ dmypy.json
 
 # ruff cache
 .ruff_cache/
+
+# database file
+database.db
